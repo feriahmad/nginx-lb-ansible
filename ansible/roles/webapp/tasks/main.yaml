@@ -1,0 +1,28 @@
+---
+- name: Install Docker
+  apt:
+    name: docker.io
+    state: present
+  become: yes
+
+- name: Install Docker Compose
+  apt:
+    name: docker-compose
+    state: present
+  become: yes
+
+- name: Create webapp directory
+  file:
+    path: /opt/webapp
+    state: directory
+    mode: '0755'
+
+- name: Copy docker-compose.yaml
+  copy:
+    src: docker-compose.yaml
+    dest: /opt/webapp/docker-compose.yaml
+
+- name: Run docker-compose
+  command: docker-compose up -d
+  args:
+    chdir: /opt/webapp

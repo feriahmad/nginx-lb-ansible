@@ -1,0 +1,31 @@
+---
+- name: Install NGINX
+  apt:
+    name: nginx
+    state: present
+
+- name: Create SSL cert directory
+  file:
+    path: /etc/nginx/ssl
+    state: directory
+
+- name: Generate self-signed SSL
+  command: bash /etc/nginx/ssl_cert.sh
+  args:
+    creates: /etc/nginx/ssl/nginx.crt
+
+- name: Copy SSL script
+  copy:
+    src: ssl_cert.sh
+    dest: /etc/nginx/ssl_cert.sh
+    mode: '0755'
+
+- name: Deploy nginx config
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+
+- name: Restart NGINX
+  service:
+    name: nginx
+    state: restarted

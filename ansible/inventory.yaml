@@ -1,0 +1,8 @@
+all:
+  children:
+    nginx:
+      hosts:
+        10.184.0.2
+    webapp:
+      hosts:
+        10.184.0.5

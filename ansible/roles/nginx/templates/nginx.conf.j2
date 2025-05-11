@@ -1,0 +1,21 @@
+events {}
+
+http {
+  upstream backend {
+    server 10.184.0.5:8081;
+    server 10.184.0.5:8082;
+    server 10.184.0.5:8083;
+  }
+
+  server {
+    listen 443 ssl;
+    ssl_certificate     /etc/nginx/ssl/nginx.crt;
+    ssl_certificate_key /etc/nginx/ssl/nginx.key;
+
+    location / {
+      proxy_pass http://backend;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+    }
+  }
+}

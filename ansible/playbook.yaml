@@ -1,0 +1,11 @@
+- name: Deploy Web App Backends
+  hosts: webapp
+  become: yes
+  roles:
+    - webapp
+
+- name: Setup NGINX Load Balancer
+  hosts: nginx
+  become: yes
+  roles:
+    - nginx
