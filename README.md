@@ -13,3 +13,14 @@ Check `ansible/inventory.yaml` to verify IPs are correct.
 ```bash
 cd ansible
 ansible-playbook -i inventory.yaml playbook.yaml
+
+
+### Test
+```bash
+curl -k https://10.184.0.2
+```
+
+This setup uses:
+- NGINX upstream config with round-robin
+- Self-signed SSL
+- Docker backends exposed on different ports

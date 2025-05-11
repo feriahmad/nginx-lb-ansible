@@ -26,3 +26,9 @@
   command: docker-compose up -d
   args:
     chdir: /opt/webapp
+
+- name: Copy HTML files for each app
+  copy:
+    src: html/
+    dest: /opt/webapp/html/
+    mode: '0755'
