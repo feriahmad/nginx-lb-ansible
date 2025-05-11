@@ -9,16 +9,16 @@
     path: /etc/nginx/ssl
     state: directory
 
-- name: Generate self-signed SSL
-  command: bash /etc/nginx/ssl_cert.sh
-  args:
-    creates: /etc/nginx/ssl/nginx.crt
-
 - name: Copy SSL script
   copy:
     src: ssl_cert.sh
     dest: /etc/nginx/ssl_cert.sh
     mode: '0755'
+
+- name: Generate self-signed SSL
+  command: bash /etc/nginx/ssl_cert.sh
+  args:
+    creates: /etc/nginx/ssl/nginx.crt
 
 - name: Deploy nginx config
   template:
