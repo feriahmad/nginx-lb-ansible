@@ -22,13 +22,34 @@
     src: docker-compose.yaml
     dest: /opt/webapp/docker-compose.yaml
 
+- name: Create html directories
+  file:
+    path: "/opt/webapp/html/{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - app1
+    - app2
+    - app3
+
+- name: Copy index.html for app1
+  copy:
+    src: html/app1/index.html
+    dest: /opt/webapp/html/app1/index.html
+
+- name: Copy index.html for app2
+  copy:
+    src: html/app2/index.html
+    dest: /opt/webapp/html/app2/index.html
+
+- name: Copy index.html for app3
+  copy:
+    src: html/app3/index.html
+    dest: /opt/webapp/html/app3/index.html
+
+
 - name: Run docker-compose
   command: docker-compose up -d
   args:
     chdir: /opt/webapp
 
-- name: Copy HTML files for each app
-  copy:
-    src: html/
-    dest: /opt/webapp/html/
-    mode: '0755'

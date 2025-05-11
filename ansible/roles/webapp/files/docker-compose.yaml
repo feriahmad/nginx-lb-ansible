@@ -3,20 +3,20 @@ services:
   app1:
     image: nginx:alpine
     volumes:
-      - ./html/app1:/usr/share/nginx/html:ro
+      - /opt/webapp/html/app1:/usr/share/nginx/html:ro
     ports:
       - "8081:80"
 
   app2:
     image: nginx:alpine
     volumes:
-      - ./html/app2:/usr/share/nginx/html:ro
+      - /opt/webapp/html/app2:/usr/share/nginx/html:ro
     ports:
       - "8082:80"
 
   app3:
     image: nginx:alpine
     volumes:
-      - ./html/app3:/usr/share/nginx/html:ro
+      - /opt/webapp/html/app3:/usr/share/nginx/html:ro
     ports:
       - "8083:80"
